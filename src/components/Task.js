@@ -20,7 +20,8 @@ function Task({data, onDelete, id, updateEdit}) {
     }
     
     return (
-        edit ? <><textarea value={value} onChange={handleChange}></textarea> <button onClick={()=> {add(id)}}> add</button></>:
+        edit ? <><textarea value={value} onChange={handleChange} className="editTask"></textarea> 
+        <button onClick={()=> {add(id)}} className="saveTask"> add</button></>:
         <div className="row list" >
            {id +1}.{data}
            <div style={{float:"right"}}>
