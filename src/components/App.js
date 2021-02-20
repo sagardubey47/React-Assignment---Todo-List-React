@@ -10,7 +10,7 @@ function App()
 
 	 function handleAdd(newTask, resetState) {
 		 
-		if(newTask != "") {
+		if(newTask != " " && newTask != "") {
         setTasks( prevTasks => {return [...prevTasks, newTask]});
 		resetState();
 	  }
@@ -27,7 +27,7 @@ function App()
 
 	 function updateEdit(id, value) {
 		
-		if(value !== "") {
+		if(value !== " " && value !== "") {
 		 let newtasks = tasks.slice(0, id);
 		 newtasks.push(value);
 		 tasks.slice(id+1).forEach(item => newtasks.push(item));
