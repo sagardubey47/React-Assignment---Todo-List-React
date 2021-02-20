@@ -7,14 +7,13 @@ import Task from "./Task"
 function App() 
 {    
     const [tasks , setTasks] = useState([]);
-	const [edit, setEdit] = useState(false);
 
 	 function handleAdd(newTask, resetState) {
 		 
 		if(newTask != "") {
         setTasks( prevTasks => {return [...prevTasks, newTask]});
 		resetState();
-	 }
+	  }
 	}
 
 	 function onDelete(id) {
@@ -26,9 +25,17 @@ function App()
 		 });
 	 }
 
-	 function handleEdit() {
-		 setEdit(true);
-	 } 
+	 function updateEdit(id, value) {
+		
+		if(value !== "") {
+		 let newtasks = tasks.slice(0, id);
+		 newtasks.push(value);
+		 tasks.slice(id+1).forEach(item => newtasks.push(item));
+		 
+		 setTasks(newtasks);
+		}
+	 }
+
 										 
 	return (
 	<div id="main">
@@ -36,7 +43,7 @@ function App()
            <h2 id="heading" > todo list</h2>
 		   {   
 			   tasks.map((task, index) => {
-                  return <Task key={index} id={index}  data={task} onDelete={onDelete} handleEdit={handleEdit} />
+                  return <Task key={index} id={index}  data={task} onDelete={onDelete} updateEdit={updateEdit} />
 		       })
 		   }
           
