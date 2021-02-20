@@ -4,14 +4,20 @@ function Task({data, onDelete, id, updateEdit}) {
 
     const [edit, setEdit] = useState(false);
     const [value, setValue] = useState("");
+    const [flag, setFlag] = useState(true);
 
     function handleEdit() {
         setEdit(true);
     }
 
     function handleChange(event) {
+       
       setValue(event.target.value);
-      console.log(value);
+      if(value.trim().length) {
+          setFlag(false);
+      } else {
+          setFlag(true);
+      }
     }
 
     function add(id) {
@@ -21,7 +27,7 @@ function Task({data, onDelete, id, updateEdit}) {
     
     return (
         edit ? <><textarea value={value} onChange={handleChange} className="editTask"></textarea> 
-        <button onClick={()=> {add(id)}} className="saveTask"> add</button></>:
+        <button disabled={flag} onClick={()=> {add(id)}} className="saveTask"> add</button></>:
         <div className="row list" >
            {id +1}.{data}
            <div style={{float:"right"}}>
